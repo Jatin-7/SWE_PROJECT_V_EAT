@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/css/grid.css">
+        <title><%= restaurant.name %></title>
+    </head>
+    <body>
+        <% if (msg) { %>
+            <script>
+              alert("<%= msg %>");
+            </script>
+            <% } %>
+        <section class="section-plans">
+            <div class="row">
+                <div class="col span-10-of-12">
+
+                    <img src="/images/person.png" style="border-radius: 20%; width: 5vw;">
+                    <div style="display: inline-block; vertical-align: super">
+                    	
+                    	<%= restaurant.restaurantName %>
+                    	<!-- Name of canteen-->
+                    	
+
+                    	<br>
+                        </div>
+                </div>
+
+                
+                <div class="col span-1-of-12">
+                    <a style="text-decoration: none; background-color: #B61010; padding: 10% 20%; color: white; vertical-align: text-bottom; margin-top: 20%; margin-bottom: 20%; box-shadow: 4px 4px 10px rgba(72, 39, 10, 0.15)" href="/owner/logout">Logout</a></div>
+
+            </div>
+        </section>
+        
+        <section class="section-plans">
+            <div class="row">
+                <h2 style="color:#B61010">DASHBOARD</h2>
+            </div>
+            <table>
+                    <tr>
+                        <td width=12 style="text-align: center;"><strong>Order Number</strong></td>
+                        <td width=12 style="text-align: center;"><strong>Order</strong></td>
+                        <td width=12 style="text-align: center;"><strong>Price</strong></td>
+                        <td width=12 style="text-align: center;"><strong>Status</strong></td>
+                        <td width=12 style="text-align: center;"><strong>Table Requests</strong></td>
+                        <td width=12 style="text-align: center;"><strong>Expected Pickup Time</strong></td>
+                    </tr>
+                    <% for(var i=0; i<orders.length; i++) { %>
+                        <% if (orders[i].orderStatus == "Pending") {%>
+                            <tr>
+                                <td width=12 style="text-align: center;"><%= i+1 %></td>
+                                <td width=12 style="text-align: center;">
+                                    <% for (var j=0;j<orders[i].orderItems.length;j++) {%>
+                                    <%= orders[i].orderItems[j].menuItemName %> (x <%= orders[i].orderItems[j].quantity %> ),
+                                  <% } %></td>
+                                <td width=12 style="text-align: center;"><%= orders[i].totalPrice %></td>
+                                <td width="12" style="text-align: center;">
+                                    <form method="post" action="<%- "/order/accept/" + orders[i].orderId %>">
+                                        <button style="background-color: #B61010; padding: 10px 20px; color: white; border: none;">Accept</button>
+                                    </form>
+                                    <form style="padding-top: 6px;" method="post" action="<%- "/order/cancel/" + orders[i].orderId %>">
+                                        <button style="background-color: #B61010; padding: 10px 20px; color: white; border: none;">Decline</button>
+                                    </form>
+                                </td>
+                                <td width=12 style="text-align: center;"><%= orders[i].description %></td>
+                                <td width=12 style="text-align: center;"><%= orders[i].expectedPickupTime %></td>
+                            </tr>
+                            <% } %>
+                    <% } %>
+                    
+                   
+                </table>
+                <div class="row" style="padding-top: 40px;">
+                    <a style="text-decoration: none; color:#B61010;" href="<%- '/restaurant/completed-orders?ownerId=' + owner._id %>">
+                        <div class="col span-4-of-11" style="box-shadow: 4px 4px 10px rgba(72, 39, 10, 0.15); text-align: center; padding: 1%;border: 2px solid #B61010;">
+                            Order History
+                        </div>
+                    </a>
+                    <div class="col">&nbsp;</div>
+                    <a style="text-decoration: none; color: white;" href="<%- '/restaurant/current-orders?ownerId=' + owner._id %>">
+                        <div class="col span-4-of-11" style="box-shadow: 4px 4px 10px rgba(12, 10, 72, 0.15); text-align: center; padding: 1%;border: 2px solid #B61010;background-color: #B61010;">
+                            Current Orders
+                        </div>
+                    </a>
+                    <div class="col">&nbsp;</div>
+                    <a style="text-decoration: none; color:#B61010;" href="<%- '/restaurant/update-menu?ownerId=' + owner._id %>">
+                        <div class="col span-4-of-11" style="box-shadow: 4px 4px 10px rgba(72, 39, 10, 0.15); text-align: center; padding: 1%;border: 2px solid #B61010;">
+                            Update Menu
+                        </div>
+                        </a>
+                    </span>
+                </div>
+        </section>
+   </body>
+</html>

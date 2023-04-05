@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/css/stordstatc.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="/css/grid.css" />
+    <% if (menuItem) {%>
+      <title>Update Menu Item</title>
+      <% } else {%>
+        <title>Add Menu Item</title>
+      <% } %>
+    
+    <style>
+      input,
+      textarea {
+        min-width: 100%;
+        max-width: 12rem;
+        padding: 7px;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        background-color: rgba(24, 49, 79, 0.06);
+        font-size: 80%;
+        margin: 1rem 0;
+        font-family: inherit;
+      }
+      section {
+        padding: 50px 0;
+      }
+      button {
+        color: white;
+        margin: 1rem 0 3rem;
+        box-shadow: 4px 4px 10px rgb(12 10 72 / 15%);
+        text-align: center;
+        width: 100%;
+        border: 2px solid #b61010;
+        background-color: #b61010;
+        padding: 0.4rem 1rem;
+      }
+      .menu-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="section-plans">
+      <div class="row">
+        <div class="col span-10-of-12">
+          <img
+            src="/images/person.png"
+            style="border-radius: 20%; width: 5vw"
+          />
+          <div style="display: inline-block; vertical-align: super">
+            <%= restaurant.name %>
+          </div>
+        </div>
+
+        <div class="col span-1-of-12">
+          <a
+            style="
+              text-decoration: none;
+              background-color: #b61010;
+              padding: 10% 20%;
+              color: white;
+              vertical-align: text-bottom;
+              margin-top: 20%;
+              margin-bottom: 20%;
+              box-shadow: 4px 4px 10px rgba(72, 39, 10, 0.15);
+            "
+            href="/owner/logout"
+            >Logout</a
+          >
+        </div>
+      </div>
+    </section>
+    <section class="section-plans" style="padding: 20px 0">
+      <div class="row">
+        <% if (menuItem) {%>
+        <h2 style="color: #b61010">UPDATE MENU ITEM</h2>
+        <% } else {%>
+        <h2 style="color: #b61010">ADD MENU ITEM</h2>
+        <% } %>
+      </div>
+    </section>
+    <section class="section-plans menu-form">
+      <% if (menuItem) {%>
+      <form action="<%= "/menu/" + menuItem._id %>" method="post">
+        <label for="name">Name</label> <br />
+        <input
+          id="name"
+          type="text"
+          class="validate"
+          name="name"
+          value="<%= menuItem.name %>"
+          required
+        /><br />
+        <label for="description">Description</label><br />
+        <textarea
+          name="description"
+          id="description"
+          cols="20"
+          rows="8"
+          required
+        >
+<%= menuItem.description %></textarea
+        >
+        <br />
+        <label for="category">Category</label> <br />
+        <input
+          id="category"
+          type="text"
+          class="validate"
+          name="category"
+          value="<%= menuItem.category %>"
+          required
+        /><br />
+        <label for="price">Price</label> <br />
+        <input
+          id="price"
+          type="number"
+          class="validate"
+          name="price"
+          value="<%= menuItem.price %>"
+          required
+        />
+        <br />
+        <label for="image">Image</label> <br />
+        <input
+          id="image"
+          type="text"
+          class="validate"
+          name="image"
+          value="<%= menuItem.image %>"
+          required
+        />
+        <br />
+        <% if (menuItem.available) {%>
+          <label for="available">Available</label>
+        <input type="radio" name="available" value="true" style="margin-top: 0; margin-bottom: 0;" checked="checked" />
+        <label for="available">Unavailable</label>
+        <input type="radio" name="available" value="false" style="margin-top: 0; margin-bottom: 0;" />
+        <br />
+          <% } else {%>
+            <label for="available">Available</label>
+            <input type="radio" name="available" value="true" style="margin-top: 0; margin-bottom: 0;"  />
+            <label for="available">Unavailable</label>
+            <input type="radio" name="available" value="false" style="margin-top: 0; margin-bottom: 0;" checked="checked"/>
+            <br />
+            <% } %>
+        <button type="submit">Update Item</button>
+      </form>
+      <% } else { %>
+      <form action="/menu" method="post">
+        <label for="name">Name</label> <br />
+        <input
+          id="name"
+          type="text"
+          class="validate"
+          name="name"
+          required
+        /><br />
+        <label for="description">Description</label><br />
+        <textarea
+          name="description"
+          id="description"
+          cols="20"
+          rows="8"
+          required
+        ></textarea>
+        <br />
+        <label for="category">Category</label> <br />
+        <input
+          id="category"
+          type="text"
+          class="validate"
+          name="category"
+          required
+        /><br />
+        <label for="price">Price</label> <br />
+        <input
+          id="price"
+          type="number"
+          class="validate"
+          name="price"
+          required
+        />
+        <br />
+        <label for="image">Image</label> <br />
+        <input id="image" type="text" class="validate" name="image" required />
+        <br />
+        <label for="available">Available</label>
+        <input type="radio" name="available" value="true" style="margin-top: 0; margin-bottom: 0;" checked="checked" />
+        <label for="available">Unavailable</label>
+        <input type="radio" name="available" value="false" style="margin-top: 0; margin-bottom: 0;" />
+        <br />
+        <button type="submit">Add Item</button>
+      </form>
+      <% } %>
+    </section>
+    <section class="section-plans">
+      <div class="row" style="padding-top: 40px">
+        <a
+          style="text-decoration: none; color: #b61010"
+          href="<%- '/restaurant/dashboard/?ownerId=' + owner._id %>"
+        >
+          <div
+            class="col span-4-of-11"
+            style="
+              box-shadow: 4px 4px 10px rgba(72, 39, 10, 0.15);
+              text-align: center;
+              padding: 1%;
+              border: 2px solid #b61010;
+            "
+          >
+            Dashboard
+          </div>
+        </a>
+        <div class="col">&nbsp;</div>
+        <a
+          style="text-decoration: none; color: #fff"
+          href="<%- '/restaurant/completed-orders?ownerId=' + owner._id %>"
+        >
+          <div
+            class="col span-4-of-11"
+            style="
+              box-shadow: 4px 4px 10px rgba(12, 10, 72, 0.15);
+              text-align: center;
+              padding: 1%;
+              border: 2px solid #b61010;
+              background-color: #b61010;
+            "
+          >
+            Order History
+          </div>
+        </a>
+        <div class="col">&nbsp;</div>
+        <a
+          style="text-decoration: none; color: white"
+          href="<%- '/restaurant/current-orders?ownerId=' + owner._id %>"
+        >
+          <div
+            class="col span-4-of-11"
+            style="
+              box-shadow: 4px 4px 10px rgba(12, 10, 72, 0.15);
+              text-align: center;
+              padding: 1%;
+              border: 2px solid #b61010;
+              background-color: #b61010;
+            "
+          >
+            Current Orders
+          </div>
+        </a>
+      </div>
+    </section>
+  </body>
+</html>

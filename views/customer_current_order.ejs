@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/css/stordstatc.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="/css/grid.css" />
+    <title>Current Orders</title>
+  </head>
+  <body>
+    <% if (msg) { %>
+      <script>
+        alert("<%= msg %>");
+      </script>
+      <% } %>
+    <section class="section-cant">
+      <div class="row">
+        <div class="col span-10-of-12">
+          <img
+            src="/images/person.png"
+            style="border-radius: 20%; width: 5vw"
+          />
+          <div style="display: inline-block; vertical-align: super">
+            <%= customer.name %>
+          </div>
+        </div>
+        <div class="col span-1-of-12">
+          <a
+            style="
+              text-decoration: none;
+              background-color: #b61010;
+              padding: 10% 20%;
+              color: white;
+              vertical-align: text-bottom;
+              margin-top: 20%;
+              margin-bottom: 20%;
+              box-shadow: 4px 4px 10px rgba(72, 39, 10, 0.15);
+            "
+            href="/customer/logout"
+            >Logout</a
+          >
+        </div>
+      </div>
+    </section>
+    <section class="section-plans">
+      <div class="row">
+        <h2>Current Orders</h2>
+      </div>
+    </section>
+    <section class="section-cant">
+      <div class="row">
+        <table>
+          <tr>
+            <td width="15" style="text-align: center">
+              <strong>Order Number</strong>
+            </td>
+            <td width="15" style="text-align: center">
+              <strong>Order</strong>
+            </td>
+            <td width="15" style="text-align: center">
+              <strong>Price</strong>
+            </td>
+            <td width="15" style="text-align: center">
+              <strong>Canteen</strong>
+            </td>
+            <td width="15" style="text-align: center">
+              <strong>Status</strong>
+            </td>
+            <td width="15" style="text-align: center">
+              <strong>Cancel Order</strong>
+            </td>
+            <td width="15" style="text-align: center">
+              <strong>Order Date</strong>
+            </td>
+            <td width="15" style="text-align: center">
+              <strong>Order Time</strong>
+            </td>
+          </tr>
+          <% for (var i=0;i<orders.length;i++) {%>
+            <% if (orders[i].status == "Accepted" || orders[i].status == "Pending") {%>
+              
+            <tr>
+              <td width="15" style="text-align: center"><%= i+1 %></td>
+              <td width="15" style="text-align: center">
+                <% for (var j=0;j<orders[i].orderItems.length;j++) {%>
+                  <%= orders[i].orderItems[j].menuItemName %> (x <%= orders[i].orderItems[j].quantity %> ),
+                <% } %>
+              </td>
+              <td width="15" style="text-align: center">
+                <%= orders[i].totalPrice %>
+              </td>
+              <td width="15" style="text-align: center">
+                <%= orders[i].canteenName %>
+              </td>
+              <% if (orders[i].status == "Accepted") {%>
+                <td width="15" style="text-align: center; color: #19d22d">
+                  <%= orders[i].status %>
+                </td>
+                <% } else { %>
+                  <td width="15" style="text-align: center;">
+                    <%= orders[i].status %>
+                  </td>
+                  <% } %>
+                  <td width="12" style="text-align: center;">
+                    <form style="padding-top: 6px;" method="post" action="/customer/order/cancel/" >
+                      <input type="hidden" name="id" value="<%= orders[i].orderId %>" >
+                      <button type="submit" style="background-color: #B61010; padding: 10px 20px; color: white; border: none;">Cancel Order</button>
+                    </form>
+                </td>
+              <td width="15" style="text-align: center">
+                <%= orders[i].date %>
+                </td>
+                <td width="15" style="text-align: center">
+                  <%= orders[i].time %>
+  
+                </td>
+              </tr>
+              <% } %>
+            <% } %>
+          
+       
+        </table>
+      </div>
+    </section>
+    <section class="section-plans">
+      <div class="row">
+        <a
+          style="text-decoration: none; color: #b61010"
+          href="/customer/dashboard"
+        >
+          <div
+            class="col span-5-of-11"
+            style="
+              box-shadow: 4px 4px 10px rgba(72, 39, 10, 0.15);
+              text-align: center;
+              padding: 1%;
+              border: 2px solid #b61010;
+            "
+          >
+            GO BACK
+          </div>
+        </a>
+        <div class="col"></div>
+        <a
+          style="text-decoration: none; color: white"
+          href="<%- '/order/order-history?customerId=' + customer._id %>"
+        >
+          <div
+            class="col span-5-of-11"
+            style="
+              box-shadow: 4px 4px 10px rgba(12, 10, 72, 0.15);
+              text-align: center;
+              padding: 1%;
+              border: 2px solid #b61010;
+              background-color: #b61010;
+            "
+          >
+            ORDER HISTORY
+          </div>
+        </a>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/css/stordstatc.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="/css/grid.css" />
+    <title>Update Menu</title>
+  </head>
+  <body>
+    <% if (msg) { %>
+    <script>
+      alert("<%= msg %>");
+    </script>
+    <% } %>
+    <section class="section-plans">
+      <div class="row">
+        <div class="col span-10-of-12">
+          <img
+            src="/images/person.png"
+            style="border-radius: 20%; width: 5vw"
+          />
+          <div style="display: inline-block; vertical-align: super">
+            <%= restaurant.name %>
+          </div>
+        </div>
+
+        <div class="col span-1-of-12">
+          <a
+            style="
+              text-decoration: none;
+              background-color: #b61010;
+              padding: 10% 20%;
+              color: white;
+              vertical-align: text-bottom;
+              margin-top: 20%;
+              margin-bottom: 20%;
+              box-shadow: 4px 4px 10px rgba(72, 39, 10, 0.15);
+            "
+            href="/owner/logout"
+            >Logout</a
+          >
+        </div>
+      </div>
+    </section>
+    <section class="section-plans" style="padding-bottom: 20px">
+      <div class="row">
+        <h2 style="color: #b61010">CHANGE MENU</h2>
+      </div>
+      <table>
+        <tr>
+          <td width="15" style="text-align: center">
+            <strong>Serial No.</strong>
+          </td>
+          <td width="15" style="text-align: center">
+            <strong>Product Name</strong>
+          </td>
+          <td width="15" style="text-align: center"><strong>Price</strong></td>
+          <td width="15" style="text-align: center"><strong>Action</strong></td>
+        </tr>
+        <% for (var i=1;i<=menuItems.length;i++) {%>
+        <tr>
+          <td width="15" style="text-align: center">
+            <strong><%= i %></strong>
+          </td>
+          <td width="15" style="text-align: center">
+            <strong><%= menuItems[i-1].name %></strong>
+          </td>
+          <td width="15" style="text-align: center">
+            <strong><%= menuItems[i-1].price %></strong>
+          </td>
+          <td width="15" style="text-align: center"><strong>
+            <form method="post" action="<%- "/menu/update/"  + menuItems[i-1]._id %>">
+              <button style="background-color: #B61010; padding: 10px 20px; color: white; border: none;">Edit</button>
+          </form>
+          <form style="padding-top: 6px;" method="post" action="<%- "/menu/delete/" + menuItems[i-1]._id  %>">
+              <button style="background-color: #B61010; padding: 10px 20px; color: white; border: none;">Delete</button>
+          </form>
+          </strong></td>
+        </tr>
+
+        <% } %>
+
+        <!-- In Actions, we can write Delete and Price change -->
+      </table>
+    </section>
+    <section class="section-plans">
+      <div class="row" style="padding-top: 40px">
+        <a
+          style="text-decoration: none; color: #b61010"
+          href="<%- '/restaurant/dashboard/?ownerId=' + owner._id %>"
+        >
+          <div
+            class="col span-4-of-11"
+            style="
+              box-shadow: 4px 4px 10px rgba(72, 39, 10, 0.15);
+              text-align: center;
+              padding: 1%;
+              border: 2px solid #b61010;
+            "
+          >
+            Dashboard
+          </div>
+        </a>
+        <div class="col">&nbsp;</div>
+        <a
+          style="text-decoration: none; color: #fff"
+          href="<%- '/restaurant/completed-orders?ownerId=' + owner._id %>"
+        >
+          <div
+            class="col span-4-of-11"
+            style="
+              box-shadow: 4px 4px 10px rgba(12, 10, 72, 0.15);
+              text-align: center;
+              padding: 1%;
+              border: 2px solid #b61010;
+              background-color: #b61010;
+            "
+          >
+            Order History
+          </div>
+        </a>
+      </div>
+      <div class="row" style="padding-top: 1 0px">
+        <a
+          style="text-decoration: none; color: white"
+          href="<%- '/restaurant/current-orders?ownerId=' + owner._id %>"
+        >
+          <div
+            class="col span-4-of-11"
+            style="
+              box-shadow: 4px 4px 10px rgba(12, 10, 72, 0.15);
+              text-align: center;
+              padding: 1%;
+              border: 2px solid #b61010;
+              background-color: #b61010;
+            "
+          >
+            Current Orders
+          </div>
+        </a>
+        <div class="col">&nbsp;</div>
+        <a
+          style="text-decoration: none; color: #b61010"
+          href="/menu/add-new-item"
+        >
+          <div
+            class="col span-4-of-11"
+            style="
+              box-shadow: 4px 4px 10px rgba(72, 39, 10, 0.15);
+              text-align: center;
+              padding: 1%;
+              border: 2px solid #b61010;
+            "
+          >
+            Add Items
+          </div>
+        </a>
+      </div>
+    </section>
+  </body>
+</html>

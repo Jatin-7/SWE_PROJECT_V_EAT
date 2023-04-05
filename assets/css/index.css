@@ -1,0 +1,90 @@
+body{
+    background-image: url(../images/food.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #B61010;
+}
+#logo{
+    height: 190px;
+    width: 300px;
+    margin-left: 17%;
+}
+.big{
+    margin-left:48%; 
+    margin-top:25%;
+}
+.mycenter{
+    margin-left: 30%;
+}
+.column1{
+    float:left;
+    width: 50%;
+    padding-top:0%;
+    margin: auto;
+    text-align: left;
+  }
+#loginimg{
+    width: 500px;
+}
+.btn{
+    width: 150px;
+    text-align: center;
+    font-size: 1.2vw;
+}
+
+.main-head{
+    font-size: 2vw;
+    margin:  2rem 0;
+    color: #B61010;
+}
+
+.btncolor{
+    background-color: #B61010;
+}
+.content2{
+    padding-top: 0%;
+}
+#mysection{
+    transition: transform 0.6s ease;
+}
+.card{
+    height:380px;
+}
+.column2{
+    float:left;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    /* margin-left: 5px; */
+  }
+    #one {
+        margin-left: 10%;
+    }
+  .myrow{
+   margin: 0 -5px;
+   /* margin-top: ; */
+  }
+  .myrow:after{
+    content: "";
+    display:table;
+    clear: both;
+  }
+.mycontainer{
+    padding: 5%;
+    margin: auto;
+    margin-top:5%; 
+    width:80%;
+    background-color:white;
+    height:600px;
+    overflow-y: hidden;
+    border-radius: 20px;
+}
+img{
+    height:450px;
+    width: 550px;
+}
+
+.loginSignupBtns ul li a{
+    margin-left: 0;
+    padding-left: 0;
+}

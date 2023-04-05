@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/css/grid.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <title>Order Cart</title>
+    </head>
+    <body>
+        <section class="section-plans">
+            <div class="row">
+                <div class="col span-10-of-12">
+                    <img src="/images/person.png" style="border-radius: 20%; width: 5vw;">
+                    <div style="display: inline-block; vertical-align: super"><?php echo $row['name']?><br><?php echo $row['custid']?></div>
+                </div>
+                <div class="col span-1-of-12"><a style="text-decoration: none; background-color: #B61010; padding: 10% 20%; color: white; vertical-align: text-bottom; margin-top: 20%; margin-bottom: 20%; box-shadow: 4px 4px 10px rgba(72, 39, 10, 0.15)" href="index.html">Logout</a></div>
+
+            </div>
+        </section>
+        <section class="section-cant" style="padding-top: 100px;">
+            <div class="row">
+                <h2>YOUR CART</h2>
+            </div>
+            <div class="row">
+                <form method="post" action="/order">
+                
+                <table style="font-family: 'Lato','Arial', sans-serif;">
+                    <div class="section-plans"></div>
+                    <tr>
+                        <td width="140"><strong>Item</strong></td>
+                        <td width="20"><strong>Quantity</strong></td>
+                        <td width="20"><strong>Price</strong></td>
+                        <td width="20"><strong>Total Price</strong></td>
+                        
+                    </tr>
+                </div>
+                <input type="hidden" name="restaurantId" value="<%= restaurantId %>" />
+                <input type="hidden" name="customerId" value="<%= customerId %>" />
+                    <% for (var i = 0; i < orderItems.length; i++) { %>
+                    <tr>
+                        <input type="hidden" name="<%= i + "id" %>" value="<%= orderItems[i].menuItemId %>" />
+                        <input type="hidden" name="<%- i + "name" %>" value="<%= orderItems[i].name %>">
+                        <input type="hidden" name="<%- i + "price" %>" value="<%= orderItems[i].price %>">
+                        <input type="hidden" name="<%- i + "quantity" %>" value="<%= orderItems[i].quantity %>">
+                        <td width=150  ><%= orderItems[i].name %></td>
+                        <td width=15 name="<%= i + "quantity" %>" value="<%= orderItems[i].quantity %>" ><%= orderItems[i].quantity %></td>
+                        <td width=15 name="<%=i + "price" %>" value="<%= orderItems[i].price %>" ><%= orderItems[i].price %></td>
+                        <td width=15><%= Number(orderItems[i].price) * Number(orderItems[i].quantity) %></td>
+                        
+                    </tr>
+                    <% } %>
+                    
+                    <tr>
+                        <td width=15></td>
+                        <td width=150><strong>Total</strong></td>
+                        <td width="15"></td>
+                        <td width=15><strong><%= orderTotal %></strong></td>
+                    </tr>
+                    <tr>
+                        <td>Expected Pick Up Time</td>
+                        <td width="15"><input type="time" name="time" id="time" required></td>
+                        <td>Table Requests</td>
+                        <td width="15"><input type="text" name="table" id="table"></td>
+                    </tr>
+                </table>
+                
+                <div class="row" style="padding-top: 50px;">
+                <a style="text-decoration: none; color:#B61010;" href="/restaurant/<%=restaurantId%>">
+                    <div class="col span-5-of-11" style="box-shadow: 4px 4px 10px rgba(72, 39, 10, 0.15); text-align: center; padding: 1%;border: 2px solid #B61010;font-family: 'Lato','Arial', sans-serif;font-weight: 300;font-size: 20px;">
+                        Go Back
+                    </div>
+                </a>
+                <div class="col" style="padding: 0 0 200px 50px;"></div>
+                
+                    <button type="submit" class="col span-5-of-11" style="box-shadow: 4px 4px 10px rgba(12, 10, 72, 0.15); text-align: center; padding: 1%;border: 2px solid #B61010;background-color: #B61010; color: white; font-family: 'Lato','Arial', sans-serif;font-weight: 300;font-size: 20px;">
+                        Confirm Order
+                    </button>
+                
+                </div>
+                
+                </form>
+            </div>
+        </section>
+    </body>
+</html>

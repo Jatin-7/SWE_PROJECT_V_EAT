@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Signup</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:400,600,700"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="/css/index.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+    />
+    <style>
+      .mycontainer {
+        padding: 0 5%;
+        overflow-y: visible;
+        height: 720px;
+      }
+      img {
+        margin: 5rem 0;
+      }
+      .card {
+        height: 580px;
+      }
+      .input-field {
+        margin-bottom: 0;
+        margin-top: 0.5rem;
+      }
+      .btn {
+        margin: 2.5rem 0;
+      }
+      .row {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <% if (msg) { %>
+      <script>
+        alert("<%= msg %>");
+      </script>
+      <% } %>
+    <div class="mycontainer">
+      <section id="mysection">
+        <section id="section0">
+          <div class="myrow">
+            <div class="column1">
+              <img id="loginimg" src="/images/undraw2.png" />
+            </div>
+
+            <div class="column2">
+              <div class="content2">
+                <h1 class="main-head"><b>Signup</b></h1>
+                <div class="card">
+                  <nav class="nav-extended btncolor">
+                    <div class="nav-content">
+                      <ul class="tabs tabs-transparent">
+                        <li class="tab"><a class="active"><%= user %></a></li>
+                      </ul>
+                    </div>
+                  </nav>
+
+                  <div id="test1" class="col s12">
+                    <div>&nbsp;</div>
+                    <div class="row">
+                      <form
+                        class="col s12"
+                        method="POST"
+                        action="<%- "/" + user.toLowerCase() + '/' %>"
+                      >
+                        <div class="row">
+                          <div class="input-field col s6 offset-s3">
+                            <input
+                              id="email"
+                              type="email"
+                              class="validate"
+                              name="email"
+                              required
+                            />
+                            <label for="email">Email</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s6 offset-s3">
+                            <input
+                              id="name"
+                              type="text"
+                              class="validate"
+                              name="name"
+                              required
+                            />
+                            <label for="name">Name</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s6 offset-s3">
+                            <input
+                              id="phone"
+                              type="text"
+                              class="validate"
+                              name="phone"
+                              required
+                            />
+                            <label for="phone">Phone</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s6 offset-s3">
+                            <input
+                              id="uname"
+                              type="text"
+                              class="validate"
+                              name="userName"
+                              required
+                            />
+                            <label for="userName">Username</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s6 offset-s3">
+                            <input
+                              id="pwd"
+                              type="password"
+                              class="validate"
+                              name="password"
+                              required
+                            />
+                            <label for="password">Password</label>
+                          </div>
+                        </div>
+                        <button
+                          type="submit"
+                          class="waves-effejct waves-light btn btncolor center studentlogin"
+                        >
+                          SIGNUP
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <div>&nbsp;</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+      $(".mycontainer").hide(); // this or use css to hide the div
+      $(".big").delay(1000).fadeOut("slow");
+      $(".mycontainer").delay(2000).fadeIn("slow");
+
+      var sect1 = document.querySelector("#section1");
+
+      $(document).ready(function () {
+        $(".tabs").tabs();
+      });
+    </script>
+  </body>
+</html>
